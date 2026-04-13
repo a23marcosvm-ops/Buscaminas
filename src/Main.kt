@@ -17,14 +17,7 @@ fun main(){
     //  mirar spot correcto
    // iniciarLogica() ???
 
-    //  interaccon la logica usando metodos de buscaminas.kt
-
-
-    //  consultar información de sólo lectura como por ejemplo saber el estado del juego (finalizado o no, etc.)
-
-    //Main.kt sólo se puede modificar la información a través de las funciones públicas que ofrezcan las clases de Buscaminas.kt
-
-    // Desde main solo se puede modificar el tablero con la función pública de destapar
+    //  interaccon la logica usando metodos de buscaminas.kt    y       readln
 
 
 

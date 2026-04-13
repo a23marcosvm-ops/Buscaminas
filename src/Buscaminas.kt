@@ -1,5 +1,3 @@
-import com.sun.jdi.Type
-
 class Buscaminas(){
 
     /*  leyenda valores celda
@@ -10,7 +8,9 @@ class Buscaminas(){
 
     //tablero vacio
     var size = 0
-    var cantidadMinas = 0
+    var cantidadMinas = 0     //  cantidad de minas debe ser configurable
+    //  //clase Buscaminas debe enviar excepción:
+    ////Si el número de minas es igual o mayor que el número de celdas del tablero debe enviar excepción
     var tablero = Array<IntArray>(0){ IntArray(0){0} }
 
 
@@ -49,31 +49,42 @@ class Buscaminas(){
     }
 
 
-    fun opciones(n: Int){
-
+    fun opciones(){
+        println("Que deseas hacer?")
+        println("[1] Mostrar tablero\n[2] Destapar celda\n[3] Poner bandera")
+        opcionEscogida()
     }
+
+
 
 
 }
 
 
-
+//  consultar información de sólo lectura como por ejemplo saber el estado del juego (finalizado o no, etc.)
 fun estado(){
 
 }
 
 
-
-fun iniciarLogica(){
+fun opcionEscogida(){
+    var n = readln().toInt()
+    if (n !in arrayOf(1,2,3,4)){
+        println("Escoge una opcion valida")
+        n = readln().toInt()
+    }
+    when(n){
+        1 -> Buscaminas.mostrar()
+        2 -> destapar()
+        3 -> flag()
+        4 -> estado()
+    }
 
 }
 
 
 
-//  otras clases y/o funciones si lo consideras oportuno.
+//  ????
+fun iniciarLogica(){
 
-
-//  dimensiones del tablero y la cantidad de minas debe ser configurable.
-
-//clase Buscaminas debe enviar excepción:
-//Si el número de minas es igual o mayor que el número de celdas del tablero debe enviar excepción
+}
