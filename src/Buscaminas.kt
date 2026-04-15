@@ -57,7 +57,6 @@ class Buscaminas(){
             println("Dificultad inválida (1, 2 o 3). Escoge una:")
             dificultad = readln().toIntOrNull()
         }
-
         val porcentaje = when (dificultad) {
             1 -> 0.10
             2 -> 0.15
@@ -65,7 +64,6 @@ class Buscaminas(){
         }
 
         val objetivoMinas = (celdasTotales * porcentaje).toInt().coerceAtLeast(1)
-
         while (cantidadMinasActuales < objetivoMinas) {
             val fila = Random.nextInt(size)
             val columna = Random.nextInt(size)
