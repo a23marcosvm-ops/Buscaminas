@@ -1,24 +1,39 @@
 fun main(){
-    var l = Buscaminas()        // instancio la clase de buscaminas vacia(la logica)
 
     println("---NUEVA PARTIDA DE BUSCAMINAS---")
     print("Introduce el valor de ancho/alto: ")
 
-    //  pido size, para pasarselo al metodo de crear tablero
-    var size = readln().toInt()
-    try {
-        l.crearTableroDeTamano(size)    // creo el tablero usando un metodo, el cual contiene un if..throw
+    crearTablero()
 
-    }catch (e: Exception){
-        println("Error: ${e.message}")
-    }
+    println("\nSelecciona el nivel de dificultad:")
+    println("[1] Fácil. 10% de minas\n[2] Estándar. 15% de minas\n[3] Difícil. 20% de minas")
 
 
-    //  mirar spot correcto
-   // iniciarLogica() ???
+    seleccionarDificultad()
+    empezarPartida()
 
     //  interaccon la logica usando metodos de buscaminas.kt    y       readln
 
 
 
+}
+
+var l = Buscaminas()        // instancio la clase de buscaminas vacia(la logica)
+
+
+fun crearTablero(){
+    // creo el tablero usando un metodo, el cual contiene un if..throw
+    try {
+        l.crearTableroDeTamano(readln())
+    }catch (e: Exception){
+        println("Error: ${e.message}")
+    }
+}
+
+fun seleccionarDificultad(){
+    try {
+        l.ponerMinasSegunDificultad(readln())
+    }catch (e: Exception){
+        println("Error: ${e.message}")
+    }
 }
