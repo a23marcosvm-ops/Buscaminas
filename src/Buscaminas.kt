@@ -39,7 +39,7 @@ class Buscaminas(){
         var n = input.toIntOrNull()
 
         while (n !in 2..30 || n == null ){
-            if (n!! < 1){ throw Exception("El tamaño del tablero no puede ser inferior a 2x2") }
+            if (n!! < 1){ throw Exception("El tamaño del tablero no puede ser inferior a 2x2\nEscoge una opción válida (número entre 2 y 30):") }
 
             println("Escoge una opcion valida")
             n = readln().toIntOrNull()
@@ -49,7 +49,7 @@ class Buscaminas(){
         celdasTotales = n*n
     }
 
-    //logica creacion y colocacion de minas
+    //logica colocacion de minas
     fun ponerMinasSegunDificultad(input: String) {
         var dificultad = input.toIntOrNull()
 
