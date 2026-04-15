@@ -12,13 +12,12 @@ fun main(){
     seleccionarDificultad()
     empezarPartida()
 
-    //  interaccon la logica usando metodos de buscaminas.kt    y       readln
 
 
 
 }
 
-var l = Buscaminas()        // instancio la clase de buscaminas vacia(la logica)
+var l = Buscaminas()
 
 
 fun crearTablero(){

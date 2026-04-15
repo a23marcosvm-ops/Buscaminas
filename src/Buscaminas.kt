@@ -9,9 +9,9 @@ fun empezarPartida(){
 class Buscaminas(){
 
     /*  leyenda valores celda
-        0 -> sin destapar
-        1 -> destapar mina   --------> explosion y perder partida
-        2 -> destapar vacia
+        -1 -> sin destap
+        1 -> destapada mina   --------> explosion y perder partida
+        2 -> destapada vacia
         3 -> sin destapar     with flag
      */
 
