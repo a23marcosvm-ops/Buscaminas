@@ -8,11 +8,17 @@ fun empezarPartida(){
 
 class Buscaminas(){
 
-    /*  leyenda valores celda
-        -1 -> sin destap
-        1 -> destapada mina   --------> explosion y perder partida
-        2 -> destapada vacia
-        3 -> sin destapar     with flag
+    /* LEYENDA
+            tablero visual:
+                '[ ]'           tapada
+                '[P]'          Tiene bandera
+                '[X]'          mina destapada
+                '[■]'          sin mina destapada. muestranumero minas alrededor
+
+            tablero logico:
+
+
+
      */
 
     //tablero vacio
@@ -22,6 +28,10 @@ class Buscaminas(){
 
 
     var tablero = Array<IntArray>(0){ IntArray(0){0} }
+
+    var tableroVisual = Array(0) { CharArray(0) { ' ' } }
+    var tableroLogico = Array(0) { IntArray(0) { 0 } }
+
 
 
     //  logica creacion tablero
@@ -40,72 +50,35 @@ class Buscaminas(){
     }
 
     //logica creacion y colocacion de minas
-    fun ponerMinasSegunDificultad(input: String){
-        var n = input.toIntOrNull()
+    fun ponerMinasSegunDificultad(input: String) {
+        var dificultad = input.toIntOrNull()
 
-        while (n !in 1..3){
-            println("Escoge una opcion valida")
-            n = readln().toIntOrNull()
-        }
-        when(n) {
-            1 -> {
-
-                val cantidadMinas = (n*n* 0.10).toInt().coerceAtLeast(1)
-                while (cantidadMinasActuales < cantidadMinas) {
-                    val fila = Random.nextInt(n)
-                    val columna = Random.nextInt(n)
-
-                    if (tablero[fila][columna] != -1) {
-                        tablero[fila][columna] = -1
-                        cantidadMinasActuales++
-                        if (cantidadMinasActuales >= celdasTotales){  throw Exception("El número de minas es igual o mayor que el número de celdas")  }
-                    }
-                }
-
-
-            }
-            2 -> {
-
-                val cantidadMinas = (n * n * 0.15).toInt().coerceAtLeast(1)
-                while (cantidadMinasActuales < cantidadMinas) {
-                    val fila = Random.nextInt(n)
-                    val columna = Random.nextInt(n)
-
-                    if (tablero[fila][columna] != -1) {
-                        tablero[fila][columna] = -1
-                        cantidadMinasActuales++
-                        if (cantidadMinasActuales >= celdasTotales) {
-                            throw Exception("El número de minas es igual o mayor que el número de celdas")
-                        }
-                    }
-                }
-            }
-            3 -> {
-
-                val cantidadMinas = (n*n* 0.2).toInt().coerceAtLeast(1)
-                while (cantidadMinasActuales < cantidadMinas) {
-                    val fila = Random.nextInt(n)
-                    val columna = Random.nextInt(n)
-
-                    if (tablero[fila][columna] != -1) {
-                        tablero[fila][columna] = -1
-                        cantidadMinasActuales++
-                        if (cantidadMinasActuales >= celdasTotales) {
-                            throw Exception("El número de minas es igual o mayor que el número de celdas")
-                        }
-                    }
-                }
-
-
-            }
+        while (dificultad !in 1..3 || dificultad == null) {
+            println("Dificultad inválida (1, 2 o 3). Escoge una:")
+            dificultad = readln().toIntOrNull()
         }
 
+        val porcentaje = when (dificultad) {
+            1 -> 0.10
+            2 -> 0.15
+            else -> 0.20
+        }
 
-        ////Si el número de minas es igual o mayor que el número de celdas del tablero debe enviar excepción
+        val objetivoMinas = (celdasTotales * porcentaje).toInt().coerceAtLeast(1)
 
+        while (cantidadMinasActuales < objetivoMinas) {
+            val fila = Random.nextInt(size)
+            val columna = Random.nextInt(size)
+
+            if (tableroLogico[fila][columna] != -1) {
+                tableroLogico[fila][columna] = -1
+                cantidadMinasActuales++
+
+                if (cantidadMinasActuales >= celdasTotales) {  throw Exception("El número de minas es igual o mayor que el número de celdas")   }
+            }
+        }
     }
-
-    }
+}
 
 
 
@@ -114,11 +87,11 @@ class Buscaminas(){
     //  logica gestion tablero
 
 
-    //completar
     fun mostrar(){
-        for (intArray in tablero){
-            println(intArray.joinToString(" "))
+        for (fila in l.tableroVisual){
+            println(fila.joinToString(" "){char -> "[$char]"})
         }
+        opciones()
     }
 
 
@@ -135,7 +108,7 @@ class Buscaminas(){
 
 
     fun opciones(){
-        println("Que deseas hacer?")
+        println("\nQue deseas hacer?")
         println("[1] Destapar celda\n[2] Poner bandera\n[3] Mostrar tablero")
         opcionEscogida()
     }
