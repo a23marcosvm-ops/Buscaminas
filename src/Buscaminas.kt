@@ -27,19 +27,23 @@ class Celda {
 }
 
 // --- CLASE PRINCIPAL ---
-class Buscaminas(val lado: Int, val dificultad: Int) {
-    val filas = lado
-    val columnas = lado
+class Buscaminas(val lado: Int?, var dificultad: Int?) {
+    var filas = lado
+    var columnas = lado
 
-    private val tablero = Array(filas) { Array(columnas) { Celda() } }
-
+    private val tablero: Array<Array<Celda>>
     var estado = EstadoJuego.JUGANDO
         private set
 
     init {
-        if (lado < 2 || lado > 30) throw sizeException("Tamaño del lado no válido (2-30).")
-        if (dificultad !in 1..3) throw difficultyException("Dificultad no válida (1-3).")
+        if (lado !in 2..30 || lado == null) throw sizeException("Tamaño del lado no válido (2-30).")
+        if (dificultad !in 1..3 || dificultad == null) throw difficultyException("Dificultad no válida (1-3).")
 
+        this.filas = lado
+        this.columnas = lado
+        this.dificultad = dificultad
+
+        this.tablero = Array(filas) { Array(columnas) { Celda() } }
         ponerMinas()
         calcularNumeros()
     }
