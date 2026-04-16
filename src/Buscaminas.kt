@@ -11,6 +11,7 @@ class Celda {
     var tieneBandera = false
     var minasAlrededor = 0
 
+    //usando 2 variables, se hace mas legible mas tarde en el codigo
     var estaTapada = true
     var estaDestapada = false
         get() = !estaTapada
